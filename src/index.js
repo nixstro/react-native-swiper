@@ -212,15 +212,13 @@ export default class extends Component {
   componentWillUnmount() {
     this.autoplayTimer && clearTimeout(this.autoplayTimer)
     this.loopJumpTimer && clearTimeout(this.loopJumpTimer)
-  }
 
+  }
   componentDidUpdate(prevProps, prevState) {
     // If the index has changed, we notify the parent via the onIndexChanged callback
-    if (this.state.index !== prevState.index)
+    if (this.state.index !== prevState.index) {
       this.props.onIndexChanged(this.state.index)
-  }
-
-  componentDidUpdate(prevProps) {
+    }
     // If autoplay props updated to true, autoplay immediately
     if (this.props.autoplay && !prevProps.autoplay) {
       this.autoplay()
