@@ -215,13 +215,12 @@ export default class extends Component {
 
   }
   componentDidUpdate(prevProps) {
-    // If the index has changed, we notify the parent via the onIndexChanged callback
-    this.props.onIndexChanged(this.state.index)
     // If autoplay props updated to true, autoplay immediately
     if (this.props.autoplay && !prevProps.autoplay) {
       this.autoplay()
     }
     if (this.props.children !== prevProps.children) {
+      this.props.onIndexChanged(this.state.index)
       if (this.props.loadMinimal && Platform.OS === 'ios') {
         this.setState({ ...this.props, index: this.state.index })
       } else {
