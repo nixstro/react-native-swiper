@@ -220,7 +220,6 @@ export default class extends Component {
       this.autoplay()
     }
     if (this.props.children !== prevProps.children) {
-      this.props.onIndexChanged(this.state.index)
       if (this.props.loadMinimal && Platform.OS === 'ios') {
         this.setState({ ...this.props, index: this.state.index })
       } else {
@@ -473,7 +472,7 @@ export default class extends Component {
     // the variation of `index` more than 1.
     // parseInt() ensures it's always an integer
     index = parseInt(index + Math.round(diff / step))
-
+  
     if (this.props.loop) {
       if (index <= -1) {
         index = state.total - 1
@@ -485,7 +484,8 @@ export default class extends Component {
         loopJump = true
       }
     }
-
+    
+    this.props.onIndexChanged(index)
     const newState = {}
     newState.index = index
     newState.loopJump = loopJump
